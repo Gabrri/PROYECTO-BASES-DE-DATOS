@@ -1,0 +1,106 @@
+-- Database generated with pgModeler (PostgreSQL Database Modeler).
+-- pgModeler  version: 0.9.3
+-- PostgreSQL version: 13.0
+-- Project Site: pgmodeler.io
+-- Model Author: ---
+
+-- Database creation must be performed outside a multi lined SQL file. 
+-- These commands were put in this file only as a convenience.
+-- 
+-- object: icfes | type: DATABASE --
+-- DROP DATABASE IF EXISTS icfes;
+-- ddl-end --
+
+
+-- object: public."Estudiante" | type: TABLE --
+-- DROP TABLE IF EXISTS public."Estudiante" CASCADE;
+CREATE TABLE public."Estudiante" (
+	"ID" serial NOT NULL,
+	"Genero" varchar(1),
+	"Lectura_diaria" varchar(60),
+	"Horas_Internet" varchar(60),
+	"Horas_Trabajo_Semanales" smallint,
+	"ID_Colegio" integer,
+	"Puntage_Global" smallint,
+	"P_lectura_critica" smallint,
+	"P_sociales_ciudadanas" smallint,
+	"P_ingles" smallint,
+	"P_ciencias_naturales" smallint,
+	"P_matematicas" smallint,
+	trabajo_papa varchar(150),
+	trabajo_mama varchar(150),
+	educacion_papa varchar(150),
+	educacion_mama varchar(150),
+	"Estrato" smallint,
+	"Internet" varchar(5),
+	tiene_tv varchar(5),
+	cantidad_libros varchar(40),
+	cantidad_personas_hogar varchar(20),
+	CONSTRAINT "Estudiante_pk" PRIMARY KEY ("ID")
+
+);
+-- ddl-end --
+ALTER TABLE public."Estudiante" OWNER TO postgres;
+-- ddl-end --
+
+-- object: public."Departamento" | type: TABLE --
+-- DROP TABLE IF EXISTS public."Departamento" CASCADE;
+CREATE TABLE public."Departamento" (
+	"ID" serial NOT NULL,
+	nombre varchar(20),
+	CONSTRAINT "Departamento_pk" PRIMARY KEY ("ID")
+
+);
+-- ddl-end --
+ALTER TABLE public."Departamento" OWNER TO postgres;
+-- ddl-end --
+
+-- object: public."Colegio" | type: TABLE --
+-- DROP TABLE IF EXISTS public."Colegio" CASCADE;
+CREATE TABLE public."Colegio" (
+	"ID" serial NOT NULL,
+	zona varchar(10),
+	jornada varchar(10),
+	nombre varchar(100),
+	bilingue varchar(5),
+	"ID_Ciudad" integer,
+	CONSTRAINT "Colegio_pk" PRIMARY KEY ("ID")
+
+);
+-- ddl-end --
+ALTER TABLE public."Colegio" OWNER TO postgres;
+-- ddl-end --
+
+-- object: "Colegio_fk" | type: CONSTRAINT --
+-- ALTER TABLE public."Estudiante" DROP CONSTRAINT IF EXISTS "Colegio_fk" CASCADE;
+ALTER TABLE public."Estudiante" ADD CONSTRAINT "Colegio_fk" FOREIGN KEY ("ID_Colegio")
+REFERENCES public."Colegio" ("ID") MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: public."Ciudad" | type: TABLE --
+-- DROP TABLE IF EXISTS public."Ciudad" CASCADE;
+CREATE TABLE public."Ciudad" (
+	"ID" serial NOT NULL,
+	nombre varchar(100),
+	"ID_Departamento" integer,
+	CONSTRAINT "Ciudad_pk" PRIMARY KEY ("ID")
+
+);
+-- ddl-end --
+ALTER TABLE public."Ciudad" OWNER TO postgres;
+-- ddl-end --
+
+-- object: "Ciudad_fk" | type: CONSTRAINT --
+-- ALTER TABLE public."Colegio" DROP CONSTRAINT IF EXISTS "Ciudad_fk" CASCADE;
+ALTER TABLE public."Colegio" ADD CONSTRAINT "Ciudad_fk" FOREIGN KEY ("ID_Ciudad")
+REFERENCES public."Ciudad" ("ID") MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: "Departamento_fk" | type: CONSTRAINT --
+-- ALTER TABLE public."Ciudad" DROP CONSTRAINT IF EXISTS "Departamento_fk" CASCADE;
+ALTER TABLE public."Ciudad" ADD CONSTRAINT "Departamento_fk" FOREIGN KEY ("ID_Departamento")
+REFERENCES public."Departamento" ("ID") MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
