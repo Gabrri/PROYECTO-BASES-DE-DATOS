@@ -1,0 +1,8 @@
+--CARGANDO LOS DATOS EN POSTGRESS
+
+alter table "Departamento" alter column nombre type varchar(50);
+
+copy "Departamento"("ID", nombre)
+from '/tmp/datos/Departamentos.csv'
+delimiter ';'
+csv header;
