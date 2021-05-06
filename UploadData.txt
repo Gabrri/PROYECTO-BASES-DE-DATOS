@@ -1,8 +1,17 @@
 --CARGANDO LOS DATOS EN POSTGRESS
 
-alter table "Departamento" alter column nombre type varchar(50);
-
 copy "Departamento"("ID", nombre)
-from '/tmp/datos/Departamentos.csv'
-delimiter ';'
+from '/tmp/datos/departamentos3.csv'
+delimiter ','
 csv header;
+
+copy "Ciudad"("ID", nombre,"ID_Departamento")
+from '/tmp/datos/municipios2.csv'
+delimiter ','
+csv header;
+
+copy "Colegio"("ID",zona,jornada,nombre,bilingue,"ID_Ciudad")
+from '/tmp/datos/Colegios.csv'
+delimiter ','
+csv header;
+
