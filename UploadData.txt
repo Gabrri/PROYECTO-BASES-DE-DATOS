@@ -1,5 +1,3 @@
---CARGANDO LOS DATOS EN POSTGRESS
-
 copy "Departamento"("ID", nombre)
 from '/tmp/datos/departamentos3.csv'
 delimiter ','
@@ -14,4 +12,13 @@ copy "Colegio"("ID",zona,jornada,nombre,bilingue,"ID_Ciudad")
 from '/tmp/datos/Colegios.csv'
 delimiter ','
 csv header;
+
+copy "Colegio"("ID",zona,jornada,nombre,bilingue,"ID_Ciudad")
+from '/tmp/datos/Estudiantes.csv'
+delimiter ','
+csv header;
+
+
+
+
 
