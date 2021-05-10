@@ -4,21 +4,39 @@ delimiter ','
 csv header;
 
 copy "Ciudad"("ID", nombre,"ID_Departamento")
-from '/tmp/datos/municipios2.csv'
+from '/tmp/datos/municipios4.csv'
 delimiter ','
 csv header;
 
-copy "Colegio"("ID",zona,jornada,nombre,bilingue,"ID_Ciudad")
-from '/tmp/datos/Colegios.csv'
+copy "Colegio"("ID", zona, jornada, nombre, bilingue,"ID_Ciudad")
+from '/tmp/datos/l4.csv'
 delimiter ','
 csv header;
 
-copy "Colegio"("ID",zona,jornada,nombre,bilingue,"ID_Ciudad")
+copy "Estudiante"(
+	"ID",
+	"Genero",
+	"Lectura_diaria",
+	"Horas_Internet",
+	"Horas_Trabajo_Semanales",
+	"ID_Colegio",
+	"Puntage_Global",
+	"P_lectura_critica",
+	"P_sociales_ciudadanas",
+	"P_ingles",
+	"P_ciencias_naturales",
+	"P_matematicas",
+	trabajo_papa,
+	trabajo_mama,
+	educacion_papa,
+	educacion_mama,
+	"Estrato",
+	"Internet",
+	tiene_tv,
+	cantidad_libros,
+	cantidad_personas_hogar)
 from '/tmp/datos/Estudiantes.csv'
 delimiter ','
 csv header;
-
-
-
 
 
